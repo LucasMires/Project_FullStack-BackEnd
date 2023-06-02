@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersRepository } from './repositories/users.repository';
-import { NotFoundException, ConflictException } from '@nestjs/common/exceptions';
+import { Injectable } from '@nestjs/common'
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { UsersRepository } from './repositories/users.repository'
+import { NotFoundException, ConflictException } from '@nestjs/common/exceptions'
 
 @Injectable()
 export class UsersService {
@@ -41,5 +41,10 @@ export class UsersService {
 			throw new NotFoundException("User not exists")
 		}
 		return await this.usersRepository.delete(parseInt(id))
+	}
+
+	async findByEmail(email: string) {
+		const user = await this.usersRepository.findEmail(email)
+		return user
 	}
 }

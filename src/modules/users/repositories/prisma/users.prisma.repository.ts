@@ -1,10 +1,11 @@
-import { PrismaService } from "src/database/prisma.service";
-import { UsersRepository } from "../users.repository";
-import { CreateUserDto } from "../../dto/create-user.dto";
-import { User } from "../../entities/user.entity";
-import { UpdateUserDto } from "../../dto/update-user.dto";
+import { PrismaService } from "src/database/prisma.service"
+import { UsersRepository } from "../users.repository"
+import { CreateUserDto } from "../../dto/create-user.dto"
+import { User } from "../../entities/user.entity"
+import { UpdateUserDto } from "../../dto/update-user.dto"
 import { Injectable } from "@nestjs/common"
-import { plainToInstance } from "class-transformer";
+import { plainToInstance } from "class-transformer"
+import { ILoginInfo } from "../users.repository"
 
 @Injectable()
 export class UsersPrismaRepository implements UsersRepository {
@@ -36,11 +37,13 @@ export class UsersPrismaRepository implements UsersRepository {
         return plainToInstance(User, user)
     }
 
-    async findEmail (email: string): Promise<User> {
+    async findEmail (userEmail: string): Promise<ILoginInfo> {
         const user = await this.prisma.client.findUnique({
-            where: { email }
+            where: { email: userEmail }
         })
-        return plainToInstance(User, user)
+        
+        const { id, email, password } = user
+        return { id, email, password }
     }
 
     async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
