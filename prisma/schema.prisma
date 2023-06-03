@@ -15,8 +15,8 @@ model Client {
   name         String
   email        String    @unique
   password     String
-  phone_number String
-  created_at   DateTime  @db.Date @default(now())
+  phone_number String    @unique
+  created_at   DateTime  @default(now()) @db.Date
   contacts     Contact[]
 
   @@map("clients")
@@ -25,9 +25,9 @@ model Client {
 model Contact {
   id           Int      @id @default(autoincrement())
   name         String
-  email        String   @unique
-  phone_number String
-  created_at   DateTime @db.Date @default(now()) 
+  email        String?
+  phone_number String   @unique
+  created_at   DateTime @default(now()) @db.Date
   client       Client   @relation(fields: [client_id], references: [id])
   client_id    Int
 
