@@ -1,18 +1,18 @@
 import { Controller, Post, Body } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { ILoginInfo } from '../users/repositories/users.repository'
 import { LocalAuthGuard } from './authLocal/local-auth.guard'
 import { UseGuards } from '@nestjs/common/decorators'
+import { ILoginInfo } from '../clients/repositories/clients.repository'
 
-type IUserLogin = Omit<ILoginInfo, "id" | "password">
+type IClientLogin = Omit<ILoginInfo, "id" | "password">
 
 @Controller('login')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post("")
+  @Post('')
   @UseGuards(LocalAuthGuard)
-  async login(@Body() user: IUserLogin) {
-    return this.authService.login(user.email)
+  async login(@Body() client: IClientLogin) {
+    return this.authService.login(client.email)
   }
 }

@@ -9,7 +9,7 @@ import {
 import { Transform } from "class-transformer"
 import { hashSync } from "bcryptjs"
 
-export class CreateUserDto {
+export class CreateClientDto {
     @IsString()
     @IsNotEmpty()
     @MinLength(3)
