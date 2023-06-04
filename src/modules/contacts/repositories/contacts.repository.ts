@@ -1,4 +1,3 @@
-import { Client } from "src/modules/clients/entities/client.entity"
 import { CreateContactDto } from "../dto/create-contact.dto"
 import { UpdateContactDto } from "../dto/update-contact.dto"
 import { Contact } from "../entities/contact.entity"

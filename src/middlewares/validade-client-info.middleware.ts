@@ -1,8 +1,7 @@
 import {
     ConflictException,
     Injectable,
-    NestMiddleware,
-    NotFoundException
+    NestMiddleware
 } from "@nestjs/common"
 import { Request, Response, NextFunction } from "express"
 import { ClientsRepository } from "src/modules/clients/repositories/clients.repository"
