@@ -12,11 +12,9 @@ export interface ILoginInfo {
 export abstract class ClientsRepository {
     abstract create(createClientDto: CreateClientDto): Promise<Client>
     abstract findAll(): Promise<Client[]>
-    abstract findOne(id: number): Promise<Client>
     abstract findEmail(email: string): Promise<ILoginInfo>
     abstract findByNumber(phone_number: string): Promise<Client>
+    abstract findOne(id: number): Promise<Client>
     abstract update(id: number, updateClientDto: UpdateClientDto): Promise<Client>
     abstract delete(id: number): Promise<void>
 }
-
-

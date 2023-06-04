@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { CreateClientDto } from './dto/create-client.dto'
 import { UpdateClientDto } from './dto/update-client.dto'
 import { ClientsRepository } from './repositories/clients.repository'
-import { NotFoundException, ConflictException } from '@nestjs/common/exceptions'
+import { UnauthorizedException } from '@nestjs/common/exceptions'
 
 @Injectable()
 export class ClientsService {
@@ -15,15 +15,18 @@ export class ClientsService {
 		return await this.clientsRepository.findAll()
 	}
 
-	async findOne(id: string) {
+	async findOne(id: string, userId: string) {
+		if (id !== userId) throw new UnauthorizedException("Action not allowed")
 		return await this.clientsRepository.findOne(parseInt(id))
 	}
 
-	async update(id: string, UpdateClientDto: UpdateClientDto) {
+	async update(id: string, UpdateClientDto: UpdateClientDto, userId: string) {
+		if (id !== userId) throw new UnauthorizedException("Action not allowed")
 		return await this.clientsRepository.update(parseInt(id), UpdateClientDto)
 	}
 
-	async remove(id: string) {
+	async remove(id: string, userId: string) {
+		if (id !== userId) throw new UnauthorizedException("Action not allowed")
 		return await this.clientsRepository.delete(parseInt(id))
 	}
 
