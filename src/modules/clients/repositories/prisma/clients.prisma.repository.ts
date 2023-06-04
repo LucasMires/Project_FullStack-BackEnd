@@ -67,5 +67,4 @@ export class ClientsPrismaRepository implements ClientsRepository {
             where: { id }
         })
     }
-
 }

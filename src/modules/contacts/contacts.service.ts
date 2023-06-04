@@ -25,8 +25,8 @@ export class ContactsService {
             if (contact.client_id !== parseInt(client_id)) {
                 throw new UnauthorizedException("This contact doesn't belong to your account")
             }
-            return contact
-        }else if (!contact){
+        }
+        if (!contact){
             throw new NotFoundException("Contact not found")
         }
         return contact
