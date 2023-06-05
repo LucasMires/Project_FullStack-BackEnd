@@ -24,6 +24,13 @@ export class ClientsController {
     return this.clientsService.findAll()
   }
 
+  @Get('info')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  findUser(@Request() req) {
+    return this.clientsService.findUser(req.user.id)
+  }
+
   @Get(':id')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)

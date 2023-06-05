@@ -20,6 +20,10 @@ export class ClientsService {
 		return await this.clientsRepository.findOne(parseInt(id))
 	}
 
+	async findUser(userId: string) {
+		return await this.clientsRepository.findOne(parseInt(userId))
+	}
+
 	async update(id: string, UpdateClientDto: UpdateClientDto, userId: string) {
 		if (id !== userId) throw new UnauthorizedException("Action not allowed")
 		return await this.clientsRepository.update(parseInt(id), UpdateClientDto)
