@@ -33,10 +33,12 @@ export class AppModule implements NestModule {
 		);
 
 		consumer.apply(EnsureClientExistsMiddleware)
+		.exclude({path: "clients/info", method: RequestMethod.GET})
 		.forRoutes(
 			{path: "clients/:id", method: RequestMethod.GET},
 			{path: "clients/:id", method: RequestMethod.PATCH},
 			{path: "clients/:id", method: RequestMethod.DELETE}
-		);
+			);
+		
 	}
 }
