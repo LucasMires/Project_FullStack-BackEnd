@@ -43,6 +43,12 @@ export class ContactsService {
 
     async update(id: string, updateContactDto: UpdateContactDto, client_id: string) {
         await this.validateUserAndClientId(id, client_id)
+        if (updateContactDto.phone_number) {
+            const validadeNumber = await this.contactsRepository.findByNumber(updateContactDto.phone_number)
+            if(validadeNumber) {
+                throw new NotFoundException("This contact doesn't belong to your account") 
+            } 
+        }
         return await this.contactsRepository.update(id, updateContactDto)
     }
 
