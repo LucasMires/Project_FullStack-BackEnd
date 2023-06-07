@@ -28,7 +28,7 @@ export class ContactsService {
         const contact = await this.contactsRepository.findOne(id)
         if (contact) {
             if (contact.client_id !== parseInt(client_id)) {
-                throw new UnauthorizedException("This contact doesn't belong to your account")
+                throw new UnauthorizedException("Number already in use")
             }
         }
         if (!contact){
@@ -46,7 +46,7 @@ export class ContactsService {
         if (updateContactDto.phone_number) {
             const validadeNumber = await this.contactsRepository.findByNumber(updateContactDto.phone_number)
             if(validadeNumber) {
-                throw new NotFoundException("This contact doesn't belong to your account") 
+                throw new NotFoundException("Number already in use") 
             } 
         }
         return await this.contactsRepository.update(id, updateContactDto)
